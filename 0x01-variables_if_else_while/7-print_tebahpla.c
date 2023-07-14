@@ -12,7 +12,7 @@ int main(void)
 	int i;
 	char lowercase;
 
-for (i = (int)sizeof(alphabets) - 1; i >= 0;  i--)
+for (i = (int)sizeof(alphabets) - 2; i >= 0;  i--)
 {
 	lowercase = (alphabets[i] + 32);
 	putchar(lowercase);
