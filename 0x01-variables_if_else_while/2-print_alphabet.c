@@ -12,11 +12,11 @@ int main(void)
 	int i;
 	char lowercase;
 
-	for (i = 0; i < (int)sizeof(alphabets) - 1; i++)
-		{
-			lowercase = (alphabets[i] + 32);
-			putchar(lowercase);
-		}
+for (i = 0; i < (int)sizeof(alphabets) - 1; i++)
+{
+	lowercase = (alphabets[i] + 32);
+	putchar(lowercase);
+}
 	putchar('\n');
 	return (0);
 }
