@@ -6,7 +6,7 @@
  * a program that prints all single digit numbers of base 10
  * starting from 0, followed by a new line.
  * only using the putchar function
- * only using putchar twice in the code 
+ * only using putchar twice in the code
  */
 
 int main(void)
