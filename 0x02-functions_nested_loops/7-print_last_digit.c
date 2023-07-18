@@ -15,5 +15,6 @@ if (number < 0)
 {
 	result = -result;
 }
+	_putchar(result + '0');
 	return (result);
 }
