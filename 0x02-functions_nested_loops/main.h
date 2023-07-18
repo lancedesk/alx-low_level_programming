@@ -2,6 +2,7 @@
 #define MAIN_H
 
 /**
+ * print_to_98 - prints all natural numbers from n to 98
  * add - adds two integers and returns the result.
  * times_table - prints the 9 times table, starting with 0.
  * jack_bauer - prints every minute of the day of Jack Bauer
@@ -15,6 +16,7 @@
  * _putchar - function to print single characters
 */
 
+void print_to_98(int n);
 int add(int, int);
 void times_table(void);
 void jack_bauer(void);
