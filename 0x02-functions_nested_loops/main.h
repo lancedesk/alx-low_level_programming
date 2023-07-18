@@ -2,6 +2,7 @@
 #define MAIN_H
 
 /**
+* times_table - prints the 9 times table, starting with 0.
 * jack_bauer - prints every minute of the day of Jack Bauer
 * print_last_digit - prints the last digit.
 * int _abs - computes absolute value of an integer.
@@ -13,6 +14,7 @@
 * _putchar - function to print single characters
 */
 
+void times_table(void);
 void jack_bauer(void);
 int print_last_digit(int);
 int _abs(int);
