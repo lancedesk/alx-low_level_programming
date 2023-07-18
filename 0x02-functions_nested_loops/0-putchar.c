@@ -3,6 +3,7 @@
 /**
  * main - entry point
  * Return: 0
+ * @c: single character input
  */
 
 int _putchar(char c);
