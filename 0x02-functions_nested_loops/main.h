@@ -2,6 +2,7 @@
 #define MAIN_H
 
 /**
+* print_last_digit - prints the last digit.
 * int _abs - computes absolute value of an integer.
 * print_sign - prints the sign of a number
 * _isalpha - checks for alphabetic character.
@@ -11,6 +12,7 @@
 * _putchar - function to print single characters
 */
 
+int print_last_digit(int);
 int _abs(int);
 int print_sign(int n);
 int _isalpha(int c);
