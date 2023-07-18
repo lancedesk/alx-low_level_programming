@@ -2,6 +2,7 @@
 #define MAIN_H
 
 /**
+* jack_bauer - prints every minute of the day of Jack Bauer
 * print_last_digit - prints the last digit.
 * int _abs - computes absolute value of an integer.
 * print_sign - prints the sign of a number
@@ -12,6 +13,7 @@
 * _putchar - function to print single characters
 */
 
+void jack_bauer(void);
 int print_last_digit(int);
 int _abs(int);
 int print_sign(int n);
