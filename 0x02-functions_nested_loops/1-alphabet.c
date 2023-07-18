@@ -1,23 +1,4 @@
-#include <stdio.h>
-
-/**
-* print_alphabet - function to print small letters
-* _putchar - function to print single characters
-*/
-
-void print_alphabet(void);
-int _putchar(char c);
-
-/**
- * main -program entry point
- * Return: 0 for success
- */
-
-int main(void)
-{
-	print_alphabet();
-	return (0);
-}
+#include "main.h"
 
 /**
  * print_alphabet - function to print aphabets
