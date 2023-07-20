@@ -18,8 +18,8 @@ void more_numbers(void)
 			}
 			else
 			{
-				_putchar(i / 10 + '0');/* prints the tens digit*/
-				_putchar(i % 10 + '0');/* prints the ones digit*/
+				_putchar(i / 10 + '0');
+				_putchar(i % 10 + '0');
 			}
 		}
 		_putchar('\n');
