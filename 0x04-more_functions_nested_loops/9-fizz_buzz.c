@@ -7,8 +7,8 @@
 
 int main(void)
 {
-	fizz_buzz();
-	return (0);
+		fizz_buzz();
+		return (0);
 }
 
 /**
@@ -17,29 +17,36 @@ int main(void)
 
 void fizz_buzz(void)
 {
-	int i;
+		int i;
 
-	for (i = 1; i <= 100; i++)
-	{
-		if ((i % 3) == 0 && (i % 5) == 0)
+		for (i = 1; i <= 100; i++)
 		{
-			printf("FizzBuzz ");
-			continue;
-		}
+				if ((i % 3) == 0 && (i % 5) == 0)
+				{
+						printf(" FizzBuzz");
+						continue;
+				}
 
-		else if ((i % 3) == 0)
-		{
-			printf("Fizz ");
-			continue;
-		}
+				else if ((i % 3) == 0)
+				{
+						printf(" Fizz");
+						continue;
+				}
 
-		else if ((i % 5) == 0)
-		{
-			printf("Buzz ");
-			continue;
-		}
+				else if ((i % 5) == 0)
+				{
+						printf(" Buzz");
+						continue;
+				}
 
-		printf("%d ", i);
-	}
-	putchar('\n');
+				if (i == 1)
+				{
+					printf("%d", i);
+				} else
+				
+				{
+					printf(" %d", i);
+				}
+		}
+		putchar('\n');
 }
