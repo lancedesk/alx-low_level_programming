@@ -2,7 +2,7 @@
 #include "main.h"
 
 /**
- * int _isupper - tests if uppercase
+ * _isupper - tests if uppercase
  * @c: integer input
  * Return: returns 1 if uppercase
  * and 0 if lowercase
