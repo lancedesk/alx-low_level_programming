@@ -4,8 +4,12 @@
 #include <string.h>
 #include <stdio.h>
 #include <ctype.h>
+#include <unistd.h>
 
 
+void print_number(int n);
+int _putchar(char c);
+char *rot13(char *str);
 char *leet(char *str);
 char *cap_string(char *string);
 char *string_toupper(char *str);
