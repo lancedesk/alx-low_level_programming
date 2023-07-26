@@ -12,7 +12,7 @@ char *leet(char *str)
 	int length = strlen(str);
 	char leetMap[256] = {0};
 
-    leetMap['a'] = leetMap['A'] = '4';
+	leetMap['a'] = leetMap['A'] = '4';
 	leetMap['e'] = leetMap['E'] = '3';
 	leetMap['o'] = leetMap['O'] = '0';
 	leetMap['t'] = leetMap['T'] = '7';
@@ -26,5 +26,5 @@ char *leet(char *str)
 		}
 	}
 
-	return str;
+	return (str);
 }
