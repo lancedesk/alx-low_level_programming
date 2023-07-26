@@ -6,6 +6,8 @@
 #include <ctype.h>
 
 
+char *leet(char *str);
+char *cap_string(char *string);
 char *string_toupper(char *str);
 void reverse_array(int *a, int n);
 int _strcmp(char *s1, char *s2);
