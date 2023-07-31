@@ -1,9 +1,9 @@
 #include "main.h"
 
 /**
- * print_chessboard - a function that 
+ * print_chessboard - a function that
  * prints the chessboard.
- * 
+ *
  * @a: null terminated array of characters
  */
 
