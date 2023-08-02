@@ -4,6 +4,7 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <string.h>
+#include <math.h>
 
 int wildcmp(char *s1, char *s2);
 int is_palindrome(char *s);
