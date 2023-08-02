@@ -38,7 +38,8 @@ int _sqrt_recursion(int n)
 
 int _sqrt_recursive_helper(int n, int low, int high)
 {
-	int mid, square;
+	int mid;
+	long int square;
 
 	if (low > high)
 	{
@@ -48,7 +49,7 @@ int _sqrt_recursive_helper(int n, int low, int high)
 
 	/* Calculate the middle value. */
 	mid = low + (high - low) / 2;
-	square = mid * mid;
+	square = (long int)mid * mid;
 
 	if (square == n)
 	{
