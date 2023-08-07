@@ -39,7 +39,7 @@ char *copy_string(char *source)
 
 /**
  * str_concat - concatenates two strings.
- * @s1 - first string
+ * @s1: first string
  * @s2: second string
  * Return: returns NULL if failure
  */
@@ -51,7 +51,7 @@ char *str_concat(char *s1, char *s2)
 
 	if (s1 == NULL && s2 == NULL)
 	{
-		return allocate_memory(1);
+		return (allocate_memory(1));
 	} else if (s1 != NULL && s2 == NULL)
 	{
 		return (copy_string(s1));
