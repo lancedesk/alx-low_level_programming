@@ -19,7 +19,7 @@ int **alloc_grid(int width, int height)
 	}
 
 	/* Allocate memory for array of pointers (rows)*/
-	the2darray = (int **)(malloc(height * sizeof(int)));
+	the2darray = (int **)(malloc(height * sizeof(int *)));
 
 	if (the2darray == NULL)
 	{
