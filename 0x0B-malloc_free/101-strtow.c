@@ -51,20 +51,17 @@ char **allocate_and_fill(char *str, int num_words)
 			if (start == -1)
 				start = i;
 		}
-		else
+		else if (start != -1)
 		{
-			if (start != -1)
+			length = i - start;
+			finalstring[word_index] = create_word(str, start, length);
+			if (finalstring[word_index] == NULL)
 			{
-				length = i - start;
-				finalstring[word_index] = create_word(str, start, length);
-				if (finalstring[word_index] == NULL)
-				{
-					free_and_copy_memory(finalstring, word_index, str, start, length);
-					return (NULL);
-				}
-				word_index++;
-				start = -1;
+				free_and_copy_memory(finalstring, word_index, str, start, length);
+				return (NULL);
 			}
+			word_index++;
+			start = -1;
 		}
 	}
 	if (start != -1)
@@ -154,7 +151,6 @@ void free_and_copy_memory(
 	{
 		free(finalstring[j]);
 	}
-
 	free(finalstring);
 
 	dest = (char *)malloc((length + 1) * sizeof(char));
@@ -164,5 +160,6 @@ void free_and_copy_memory(
 		strncpy(dest, src + start, length);
 		dest[length] = '\0';
 	}
-}
 
+	free(dest);
+}
