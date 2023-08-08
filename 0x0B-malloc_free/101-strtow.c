@@ -46,7 +46,7 @@ char **allocate_and_fill(char *str, int num_words)
 		return (NULL);
 	for (i = 0; str[i] != '\0'; i++)
 	{
-		if (str[i] != ' ')
+		if (isalnum(str[i]))
 		{
 			if (start == -1)
 				start = i;
@@ -69,7 +69,7 @@ char **allocate_and_fill(char *str, int num_words)
 	}
 	if (start != -1)
 	{
-		length = strlen(str) - start;
+		length = i - start;
 		finalstring[word_index] = create_word(str, start, length);
 		if (finalstring[word_index] == NULL)
 		{
