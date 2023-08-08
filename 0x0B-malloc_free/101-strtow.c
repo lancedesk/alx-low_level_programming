@@ -1,112 +1,15 @@
 #include "main.h"
 
 /**
- * strtow - returns a pointer to
- * an array of strings (words)
- * @str: string to be split
- * Return: pointer to an array
- * of strings (words)
- */
-
-char **strtow(char *str)
-{
-	char **finalstring;
-	int num_words;
-
-	if (str == NULL || str[0] == '\0')
-		return (NULL);
-
-	num_words = count_words(str);
-
-	if (num_words == 0)
-		return (NULL);
-
-	finalstring = allocate_and_fill(str, num_words);
-
-	if (finalstring == NULL)
-		return (NULL);
-
-	return (finalstring);
-}
-
-/**
- * allocate_and_fill - allocates memory and
- * fills the finalstring array with words
- * @str: string to be split
- * @num_words: number of words
- * Return: pointer to the filled array
- */
-
-char **allocate_and_fill(char *str, int num_words)
-{
-	int i, length, word_index = 0, start = -1;
-	char **finalstring = (char **)malloc((num_words + 1) * sizeof(char *));
-
-	if (finalstring == NULL)
-		return (NULL);
-	for (i = 0; str[i] != '\0'; i++)
-	{
-		if (isalnum(str[i]))
-		{
-			if (start == -1)
-				start = i;
-		}
-		else if (start != -1)
-		{
-			length = i - start;
-			finalstring[word_index] = create_word(str, start, length);
-			if (finalstring[word_index] == NULL)
-			{
-				free_and_copy_memory(finalstring, word_index, str, start, length);
-				return (NULL);
-			}
-			word_index++;
-			start = -1;
-		}
-	}
-	if (start != -1)
-	{
-		length = i - start;
-		finalstring[word_index] = create_word(str, start, length);
-		if (finalstring[word_index] == NULL)
-		{
-			free_and_copy_memory(finalstring, word_index, str, start, length);
-			return (NULL);
-		}
-	}
-	finalstring[word_index] = NULL;
-	return (finalstring);
-}
-
-/**
- * create_word - creates a new word and copies data into it
- * @src: source string
- * @start: start of string
- * @length: length of string
- * Return: pointer to the new word
- */
-
-char *create_word(char *src, int start, int length)
-{
-	char *word = (char *)malloc((length + 1) * sizeof(char));
-
-	if (word == NULL)
-		return (NULL);
-
-	strncpy(word, src + start, length);
-	word[length] = '\0';
-	return (word);
-}
-
-/**
- * count_words - counts words in string
- * @str: string to be counted
- * Return: number of words in string
+ * count_words - helper function
+ * to count the number of words in a string
+ * @str: string to evaluate
+ * Return: number of words
  */
 
 int count_words(char *str)
 {
-	int count = 0, is_word = 0, i;
+	int i, is_word = 0, word_count = 0;
 
 	for (i = 0; str[i] != '\0'; i++)
 	{
@@ -114,8 +17,8 @@ int count_words(char *str)
 		{
 			if (!is_word)
 			{
-				count++;
 				is_word = 1;
+				word_count++;
 			}
 		}
 		else
@@ -124,42 +27,55 @@ int count_words(char *str)
 		}
 	}
 
-	return (count);
+	return (word_count);
 }
 
 /**
- * free_and_copy_memory - frees memory and copies words from string to string
- * @finalstring: final string
- * @word_index: word index
- * @src: source string
- * @start: start of string
- * @length: length of string
+ * strtow - splits a string into words
+ * @str: string to split
+ * Return: pointer to an array of strings (Success)
+ * or NULL (Error)
  */
 
-void free_and_copy_memory(
-		char **finalstring,
-		int word_index,
-		char *src,
-		int start,
-		int length
-		)
+char **strtow(char *str)
 {
-	int j;
-	char *dest;
+	char **word_array, *temp_word;
+	int i, word_index = 0, str_len = 0;
+	int word_count = 0, temp_word_len = 0, start = 0, end = 0;
 
-	for (j = 0; j < word_index; j++)
+	while (str[str_len])
+		str_len++;
+	word_count = count_words(str);
+	if (word_count == 0)
+		return (NULL);
+	word_array = (char **)malloc(sizeof(char *) * (word_count + 1));
+	if (word_array == NULL)
+		return (NULL);
+	for (i = 0; i <= str_len; i++)
 	{
-		free(finalstring[j]);
+		if (str[i] == ' ' || str[i] == '\0')
+		{
+			if (temp_word_len > 0)
+			{
+				end = i;
+				temp_word = (char *)malloc(sizeof(char) * (temp_word_len + 1));
+				if (temp_word == NULL)
+					return (NULL);
+				while (start < end)
+					*temp_word++ = str[start++];
+
+				*temp_word = '\0';
+				word_array[word_index] = temp_word - temp_word_len;
+				word_index++;
+				temp_word_len = 0;
+			}
+		}
+		else if (temp_word_len++ == 0)
+		{
+			start = i;
+		}
 	}
-	free(finalstring);
+	word_array[word_index] = NULL;
 
-	dest = (char *)malloc((length + 1) * sizeof(char));
-
-	if (dest != NULL)
-	{
-		strncpy(dest, src + start, length);
-		dest[length] = '\0';
-	}
-
-	free(dest);
+	return (word_array);
 }
