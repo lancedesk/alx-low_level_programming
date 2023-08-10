@@ -1,16 +1,16 @@
 #include "main.h"
 
 /**
- * main - Multiplies two positive numbers
- * @argc: Number of arguments
- * @argv: Argument vectors
- * Return: 0 on success
+ * main - multiplies two positive numbers
+ * @argc: n arguments
+ * @argv: args
+ * Return: int
  **/
 
 int main(int argc, char *argv[])
 {
-	unsigned long product;
-	int index1, index2;
+	int i, j;
+	unsigned long result;
 
 	if (argc != 3)
 	{
@@ -18,11 +18,11 @@ int main(int argc, char *argv[])
 		exit(98);
 	}
 
-	for (index1 = 1; index1 < argc; index1++)
+	for (i = 1; i < argc; i++)
 	{
-		for (index2 = 0; argv[index1][index2] != '\0'; index2++)
+		for (j = 0; argv[i][j] != '\0'; j++)
 		{
-			if (argv[index1][index2] > '9' || argv[index1][index2] < '0')
+			if (argv[i][j] > '9' || argv[i][j] < '0')
 			{
 				printf("Error\n");
 				exit(98);
@@ -30,7 +30,7 @@ int main(int argc, char *argv[])
 		}
 	}
 
-	product = atoi(argv[1]) * atoi(argv[2]);
-	printf("%lu\n", product);
+	result = atoi(argv[1]) * atoi(argv[2]);
+	printf("%lu\n", result);
 	return (0);
 }
