@@ -1,106 +1,101 @@
 #include "main.h"
 
 /**
- * main - multiplies two positive numbers
- * @argc: number of arguments
- * @argv: argument vectors
- * Return: 0 on success
- **/
+ * is_digit_string - Checks if a given string consists of only digits.
+ * @str: The input string to be checked.
+ *
+ * Return: 1 if the string contains only digits, 0 otherwise.
+ */
 
-int main(int argc, char *argv[])
+int is_digit_string(const char *str)
 {
-	char *num1_str, *num2_str;
+	int i;
 
-	if (argc != 3 || !onlyNumbers(argv[1]) || !onlyNumbers(argv[2]))
+	for (i = 0; str[i] != '\0'; i++)
 	{
-		printf("Error\n");
-		return (98);
-	}
-
-	num1_str = argv[1];
-	num2_str = argv[2];
-
-	multiplyAndPrint(num1_str, num2_str);
-
-	return (0);
-}
-
-/**
- * multiplyAndPrint - multiplies two positive numbers and prints the result
- * @num1_str: first positive number as a string
- * @num2_str: second positive number as a string
- **/
-void multiplyAndPrint(char *num1_str, char *num2_str)
-{
-	int len1 = _strlen(num1_str);
-	int len2 = _strlen(num2_str);
-	int total_len = len1 + len2;
-	int *result = calloc(total_len, sizeof(int));
-	int start, i, j, carry, digit1, digit2, temp;
-
-	if (!result)
-	{
-		printf("Error\n");
-		exit(98);
-	}
-
-	for (i = len1 - 1; i >= 0; i--)
-	{
-		carry = 0;
-		digit1 = num1_str[i] - '0';
-
-		for (j = len2 - 1; j >= 0; j--)
+		if (str[i] < '0' || str[i] > '9')
 		{
-			digit2 = num2_str[j] - '0';
-			temp = result[i + j + 1] + (digit1 * digit2) + carry;
-
-			result[i + j + 1] = temp % 10;
-			carry = temp / 10;
-		}
-
-		if (carry)
-		{
-			result[i] += carry;
-		}
-	}
-
-	start = (result[0] == 0) ? 1 : 0;
-
-	for (i = start; i < total_len; i++)
-	{
-		printf("%d", result[i]);
-	}
-	printf("\n");
-	free(result);
-}
-
-/**
- * onlyNumbers - checks if a string has only numbers
- * @c: input string
- * Return: 1 if true, 0 if false
- **/
-int onlyNumbers(char *c)
-{
-	while (*c)
-	{
-		if (*c < '0' || *c > '9')
 			return (0);
-		c++;
+		}
 	}
 	return (1);
 }
 
 /**
- * _strlen - returns the length of a string
- * @s: string s
- * Return: length of string
- **/
-int _strlen(char *s)
+ * multiply - Multiplies two positive numbers represented as strings.
+ * @num1: The first input number as a string.
+ * @num2: The second input number as a string.
+ *
+ * Description: This function multiplies two positive numbers represented as
+ * strings and prints the result. It performs standard multiplication algorithm
+ * using arrays and carries. It also includes input validation for digits.
+ */
+
+void multiply(const char *num1, const char *num2)
 {
-	int length = 0;
+	int i, j, len1, len2,  result_len, *result, start = 0;
 
-	while (s[length] != '\0')
-		length++;
+	if (!is_digit_string(num1) || !is_digit_string(num2))
+	{
+		printf("Error\n");
+		exit(98);
+	}
+	len1 = strlen(num1);
+	len2 = strlen(num2);
+	result_len = len1 + len2;
+	result = calloc(result_len, sizeof(int));
+	if (!result)
+	{
+		exit(98);
+	}
+	for (i = len1 - 1; i >= 0; i--)
+	{
+		for (j = len2 - 1; j >= 0; j--)
+		{
+			result[i + j + 1] += (num1[i] - '0') * (num2[j] - '0');
+			result[i + j] += result[i + j + 1] / 10;
+			result[i + j + 1] %= 10;
+		}
+	}
+	while (start < result_len && result[start] == 0)
+	{
+		start++;
+	}
+	if (start == result_len)
+	{
+		printf("0\n");
+	} else
+	{
+		for (i = start; i < result_len; i++)
+		{
+			printf("%d", result[i]);
+		}
+		printf("\n");
+	}
+	free(result);
+}
 
-	return (length);
+/**
+ * main - Entry point of the program.
+ * @argc: The number of command-line arguments.
+ * @argv: An array of strings representing the command-line arguments.
+ *
+ * Return: 0 on success, 98 on error.
+ *
+ * Description: This function reads two command-line arguments, which are
+ * assumed to be positive numbers, and passes them to the 'multiply' function
+ * to perform multiplication and print the result.
+ */
+
+int main(int argc, char *argv[])
+{
+	if (argc != 3)
+	{
+		printf("Error\n");
+		return (98);
+	}
+
+	multiply(argv[1], argv[2]);
+
+	return (0);
 }
