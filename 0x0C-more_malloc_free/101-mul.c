@@ -1,86 +1,76 @@
 #include "main.h"
 
-int onlyDigits(char *str);
-int getLength(char *str);
-void *allocateMemory(unsigned int size);
-void printProduct(int *product, int total);
-void performMultiplication(char *num1, char *num2);
-
 /**
  * main - Entry point of the program
- * @argc: The number of command-line arguments
- * @argv: An array of pointers to the command-line arguments
- *
- * Return: Always 0 (Success)
+ * @argc: Number of command-line arguments
+ * @argv: Array of pointers to command-line arguments
+ * Return: 0 on success, non-zero on failure
  */
-
 int main(int argc, char *argv[])
 {
-	char *first_number = argv[1];
-	char *second_number = argv[2];
+	char *first_num_str = argv[1];
+	char *second_num_str = argv[2];
 
-	if (argc != 3 || !onlyDigits(first_number) || !onlyDigits(second_number))
+	if (argc != 3 || !isOnlyDigits(first_num_str) || !isOnlyDigits(second_num_str))
 	{
 		printf("Error\n");
-		exit(98);
+		return (98);
 	}
 
-	if (*first_number == '0' || *second_number == '0')
+	if (*first_num_str == '0' || *second_num_str == '0')
 	{
 		printf("0\n");
 	}
 	else
 	{
-		performMultiplication(second_number, first_number);
+		performMultiplication(second_num_str, first_num_str);
 	}
 
 	return (0);
 }
 
 /**
- * performMultiplication - Multiplies two strings representing numbers
- * @num1: First input number as a string
- * @num2: Second input number as a string
+ * performMultiplication - Multiplies two positive numbers and prints the result
+ * @num1_str: First positive number as a string
+ * @num2_str: Second positive number as a string
  */
-
-void performMultiplication(char *num1, char *num2)
+void performMultiplication(char *num1_str, char *num2_str)
 {
 	int i, j, len1, len2, total, digit1, digit2, result = 0;
-	int *product;
+	int *product_array;
 
-	len1 = getLength(num1);
-	len2 = getLength(num2);
+	len1 = strLength(num1_str);
+	len2 = strLength(num2_str);
 	total = len1 + len2;
-	product = allocateMemory(total);
+	product_array = allocateAndInitialize(total);
 
 	for (i = len1 - 1; i >= 0; i--)
 	{
-		digit1 = num1[i] - '0';
+		digit1 = num1_str[i] - '0';
 		result = 0;
 		for (j = len2 - 1; j >= 0; j--)
 		{
-			digit2 = num2[j] - '0';
-			result += product[i + j + 1] + (digit1 * digit2);
-			product[i + j + 1] = result % 10;
+			digit2 = num2_str[j] - '0';
+			result += product_array[i + j + 1] + (digit1 * digit2);
+			product_array[i + j + 1] = result % 10;
 			result /= 10;
 		}
 		if (result)
 		{
-			product[i + len2] += result;
+			product_array[i + len2] += result;
 		}
 	}
 
-	printProduct(product, total);
-	free(product);
+	printProduct(product_array, total);
+	free(product_array);
 }
 
 /**
- * onlyDigits - checks if a string contains only digits
- * @str: input string
+ * isOnlyDigits - Checks if a string contains only digits
+ * @str: Input string
  * Return: 1 if only digits, 0 otherwise
  */
-
-int onlyDigits(char *str)
+int isOnlyDigits(char *str)
 {
 	while (*str)
 	{
@@ -90,17 +80,15 @@ int onlyDigits(char *str)
 		}
 		str++;
 	}
-
 	return (1);
 }
 
 /**
- * getLength - calculates the length of a string
- * @str: input string
- * Return: length of the string
+ * strLength - Calculates the length of a string
+ * @str: Input string
+ * Return: Length of the string
  */
-
-int getLength(char *str)
+int strLength(char *str)
 {
 	char *ptr = str;
 
@@ -108,62 +96,68 @@ int getLength(char *str)
 	{
 		str++;
 	}
-
 	return (str - ptr);
 }
 
 /**
- * allocateMemory - allocates memory and initializes it to zeros
- * @size: size of the memory to allocate
- * Return: pointer to the allocated memory
+ * allocateAndInitialize - Allocates memory for an array and initializes it to zeros
+ * @size: Size of the array to allocate
+ * Return: Pointer to the allocated array
  */
-
-void *allocateMemory(unsigned int size)
+void *allocateAndInitialize(unsigned int size)
 {
-	int *intPtr;
-	unsigned int i;
 	void *ptr = malloc(size * sizeof(int));
 
 	if (!ptr)
 	{
 		return (NULL);
 	}
-
-	intPtr = ptr;
-	for (i = 0; i < size; i++)
-	{
-		intPtr[i] = 0;
-	}
-
+	initializeMemory(ptr, 0, size * sizeof(int));
 	return (ptr);
 }
 
+/**
+ * initializeMemory - Fills memory with a constant value
+ * @mem: Memory area
+ * @value: Constant value
+ * @size: Size of the memory area
+ */
+void initializeMemory(void *mem, char value, unsigned int size)
+{
+	char *ptr = mem;
+
+	while (size--)
+	{
+		*ptr = value;
+		ptr++;
+	}
+}
 
 /**
- * printProduct - prints the product array and handles leading zeros
- * @product: pointer to the product array
- * @total: total number of digits in the product
+ * printProduct - Prints the product array and handles leading zeros
+ * @product_array: Pointer to the product array
+ * @total: Total number of digits in the product
  */
-
-void printProduct(int *product, int total)
+void printProduct(int *product_array, int total)
 {
 	int i = 0;
 
-	while (i < total && product[i] == 0)
+	while (i < total && product_array[i] == 0)
 	{
 		i++;
 	}
 
 	if (i == total)
 	{
-		printf("0\n");
-		return;
+		_putchar('0');
 	}
-
-	for (; i < total; i++)
+	else
 	{
-		printf("%d", product[i]);
+		for (; i < total; i++)
+		{
+			_putchar(product_array[i] + '0');
+		}
 	}
-
-	printf("\n");
+	_putchar('\n');
 }
+
