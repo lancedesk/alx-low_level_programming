@@ -36,7 +36,7 @@ void multiplyAndPrint(char *num1_str, char *num2_str)
 	int len2 = _strlen(num2_str);
 	int total_len = len1 + len2;
 	int *result = calloc(total_len, sizeof(int));
-	int start, i, j, carry, digit1, digit2, temp;  
+	int start, i, j, carry, digit1, digit2, temp;
 
 	if (!result)
 	{
@@ -104,4 +104,3 @@ int _strlen(char *s)
 
 	return (length);
 }
-
