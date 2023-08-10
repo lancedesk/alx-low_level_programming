@@ -25,12 +25,10 @@ int *array_range(int min, int max)
 		return (NULL);
 	}
 
-	for (i = min; i < totalsize; i++)
+	for (i = 0; i < totalsize; i++)
 	{
 		pointer[i] = min++;      
 	}
-
-	pointer[totalsize] = '\0';
 
 	return (pointer);
 }
