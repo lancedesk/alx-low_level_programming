@@ -120,15 +120,24 @@ int getLength(char *str)
 
 void *allocateMemory(unsigned int size)
 {
+	int *intPtr;
+	unsigned int i;
 	void *ptr = malloc(size * sizeof(int));
 
 	if (!ptr)
 	{
 		return (NULL);
 	}
-	memset(ptr, 0, size * sizeof(int));
+
+	intPtr = ptr;
+	for (i = 0; i < size; i++)
+	{
+		intPtr[i] = 0;
+	}
+
 	return (ptr);
 }
+
 
 /**
  * printProduct - prints the product array and handles leading zeros
