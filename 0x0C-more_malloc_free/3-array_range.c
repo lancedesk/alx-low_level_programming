@@ -18,7 +18,7 @@ int *array_range(int min, int max)
 
 	totalsize = (max - min) + 1;
 
-	pointer = (int *)(malloc(totalsize * sizeof(int)));
+	pointer = (int *)(calloc(totalsize, sizeof(int)));
 
 	if (pointer == NULL)
 	{
@@ -27,8 +27,10 @@ int *array_range(int min, int max)
 
 	for (i = min; i < totalsize; i++)
 	{
-		pointer[i] = min++;
+		pointer[i] = min++;      
 	}
+
+	pointer[totalsize] = '\0';
 
 	return (pointer);
 }
