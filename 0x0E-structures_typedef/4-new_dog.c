@@ -5,8 +5,7 @@
  * @name: name of the dog
  * @age: age of the dog
  * @owner: owner of the dog
- * Return: new dog copy
-*/
+ */
 
 dog_t *new_dog(char *name, float age, char *owner)
 {
@@ -17,19 +16,30 @@ dog_t *new_dog(char *name, float age, char *owner)
 		return (NULL);
 	}
 
-	/* Allocate memory for the new dog_t structure */
 	my_dog = (dog_t *)malloc(sizeof(dog_t));
 
 	if (my_dog == NULL)
 	{
-		/* Memory allocation failed */
 		return (NULL);
 	}
 
-	/* Copy the attributes to the new structure */
-	my_dog->name = name;
+	/* Allocate memory for the strings and copy their content */
+	/* +1 for the null terminator */
+	my_dog->name = malloc(strlen(name) + 1);
+	my_dog->owner = malloc(strlen(owner) + 1);
+
+	if (my_dog->name == NULL || my_dog->owner == NULL)
+	{
+		free(my_dog->name);
+		free(my_dog->owner);
+		free(my_dog);
+		return (NULL);
+	}
+
+	strcpy(my_dog->name, name);
+	strcpy(my_dog->owner, owner);
+
 	my_dog->age = age;
-	my_dog->owner = owner;
 
 	return (my_dog);
 }
