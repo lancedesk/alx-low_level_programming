@@ -1,63 +1,39 @@
-#include <stdio.h>
 #include <stdlib.h>
-
-void print_opcodes(void (*func)());
-void main_wrapper();
+#include <stdio.h>
 
 /**
- * main - entry point
- * @argc: number of arguments.
- * @argv: argument vector.
+ * main - Entry point for the program.
+ * @argc: Number of arguments.
+ * @argv: Argument vector.
+ *
  * Return: 0 for success.
  */
 int main(int argc, char *argv[])
 {
+	int i, inputSize;
+
 	if (argc != 2)
 	{
 		printf("Error\n");
-		return (1);
+		exit(1);
 	}
 
-	int num_bytes = atoi(argv[1]);
-	if (num_bytes <= 0)
+	inputSize = atoi(argv[1]);
+	if (inputSize < 0)
 	{
 		printf("Error\n");
-		return (2);
+		exit(2);
 	}
 
-	if (num_bytes > 40)
+	for (i = 0; i < inputSize; i++)
 	{
-		printf("Error\n");
-		return (3);
+		printf("%02hhx", *((char *)main + i));
+		if (i < inputSize - 1)
+			printf(" ");
+		else
+			printf("\n");
 	}
-
-	/* Calls main */
-	void (*main_func)() = main_wrapper;
-	print_opcodes(main_func);
 
 	return (0);
 }
 
-/**
- * print_opcodes - prints opcodes
- */
-void print_opcodes(void (*func)())
-{
-	int i;
-	unsigned char *opcodes = (unsigned char *)func;
-
-	printf("%02x", opcodes[0]);
-	for (i = 1; opcodes[i] != 0xc3; i++)
-	{
-		printf(" %02x", opcodes[i]);
-	}
-	printf("\n");
-}
-
-/**
- * main_wrapper - Wrapper function to call main
- */
-void main_wrapper()
-{
-	main(0, NULL);
-}
