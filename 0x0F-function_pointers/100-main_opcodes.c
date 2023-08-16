@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void main_function();
 void print_opcodes(void (*func)());
+void main_wrapper();
 
 /**
  * main - entry point
@@ -31,17 +31,11 @@ int main(int argc, char *argv[])
 		return (3);
 	}
 
-	print_opcodes(main_function);
+	/* Calls main */
+	void (*main_func)() = main_wrapper;
+	print_opcodes(main_func);
 
 	return (0);
-}
-
-/**
- * main_function - placeholder for main function code
- */
-void main_function()
-{
-	/* A placeholder function */
 }
 
 /**
@@ -60,3 +54,10 @@ void print_opcodes(void (*func)())
 	printf("\n");
 }
 
+/**
+ * main_wrapper - Wrapper function to call main
+ */
+void main_wrapper()
+{
+	main(0, NULL);
+}
