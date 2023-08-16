@@ -30,7 +30,7 @@ int main(int argc, char **argv)
 	if (func_ptr == NULL)
 	{
 		printf("Error\n");
-		return (98);
+		return (99);
 	}
 
 	result = func_ptr(a, b);
