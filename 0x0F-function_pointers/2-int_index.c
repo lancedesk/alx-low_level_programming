@@ -9,25 +9,22 @@
 
 int int_index(int *array, int size, int (*cmp)(int))
 {
-	int i, index = 0;
+	int i, index = -1; /* Initialize index to -1 */
 
-	if (size > 0 && cmp && size && array)
+	if (size > 0 && cmp && array)
 	{
-
 		for (i = 0; i < size; i++)
 		{
 			if (cmp(array[i]) != 0)
 			{
+				/* Update index only when a match is found */
+				index = i;
 				break;
 			}
-			index++;
-		}
-
-		if (index >= 0)
-		{
-			return (index);
 		}
 	}
 
-	return (-1);
+	/* Return the correct index or -1 if no match found */
+	return (index);
 }
+
