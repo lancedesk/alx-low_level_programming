@@ -3,8 +3,9 @@
 /**
  * int_index - searches for an integer
  * @array: array to search
- *@size: number of elements in array
+ * @size: number of elements in array
  * @cmp: function to compare values
+ * Return: returns index if found or not
  */
 
 int int_index(int *array, int size, int (*cmp)(int))
