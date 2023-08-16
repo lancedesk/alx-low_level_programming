@@ -14,7 +14,7 @@ int main(int argc, char **argv)
 	char *operand;
 	int (*func_ptr)(int, int);
 
-	if (argc < 4 || argv == NULL)
+	if (argc != 4)
 	{
 		printf("Error\n");
 		exit(98);
