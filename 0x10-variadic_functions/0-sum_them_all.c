@@ -26,7 +26,7 @@ int sum_them_all(const unsigned int n, ...)
 	/* Loop through variadic arguments and calculate sum */
 	for (i = 0; i < n; i++)
 	{
-		sum += va_arg(numbers, int);    
+		sum += va_arg(numbers, int);
 	}
 
 	/* Clean up va_list */
