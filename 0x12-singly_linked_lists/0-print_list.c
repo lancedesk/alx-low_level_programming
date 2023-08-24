@@ -18,15 +18,6 @@ size_t print_list(const list_t *h)
 {
 	size_t total_size = 0;
 
-	if (h == NULL)
-	{
-		/* Print the format with newline */
-		printf("[0] (nil)\n");
-
-		/* Return 0 since there are no nodes */
-		return (0);
-	}
-
 	/* Loop through the linked list */
 	while (h != NULL)
 	{
