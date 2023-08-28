@@ -13,12 +13,22 @@
 
 void free_listint2(listint_t **head)
 {
-	listint_t *freed_list;
+	listint_t *freed_list, *temporary;
 
-	while (*head != NULL)
+	if (*head == NULL)
 	{
-		freed_list = *head;
-		*head = (*head)->next;
-		free(freed_list);
+		return;
 	}
+
+	freed_list = *head;
+
+	while (freed_list != NULL)
+	{
+		temporary = freed_list;
+		freed_list = temporary->next;
+		free(temporary);
+	}
+
+	*head = NULL;
+	head = NULL;
 }
