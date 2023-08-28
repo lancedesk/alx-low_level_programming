@@ -23,8 +23,8 @@ void free_listint2(listint_t **head)
 	while (*head != NULL)
 	{
 		freed_list = *head;
-		free(freed_list);
 		*head = (*head)->next;
+		free(freed_list);
 	}
 
 	*head = NULL;
