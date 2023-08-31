@@ -4,31 +4,32 @@
  * print_binary - Prints the binary representation of a number.
  * @n: The number to print in binary.
  *
- * Return: None.
+ * Return: Void.
  */
 
 void print_binary(unsigned long int n)
 {
-
+	int size, i, first_found;
 	if (n == 0)
 	{
 		_putchar('0');
+		return;
 	}
 
-	else if (n == 1)
-	{
-		_putchar('1');
-	}
+	size = sizeof(unsigned long int) * 8;
+	first_found = 0;
 
-	else
+	for (i = size - 1; i >= 0; i--)
 	{
-		while (n > 0)
+		if ((n >> i) & 1)
 		{
-			/* Print the least significant bit */
-			_putchar((n & 1) + '0');
-
-			/* Right-shift to get the next bit */
-			n >>= 1;
+			_putchar('1');
+			first_found = 1;
+		}
+		else if (first_found)
+		{
+			_putchar('0');
 		}
 	}
 }
+
