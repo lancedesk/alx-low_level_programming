@@ -10,6 +10,7 @@
 void print_binary(unsigned long int n)
 {
 	int size, i, first_found;
+
 	if (n == 0)
 	{
 		_putchar('0');
