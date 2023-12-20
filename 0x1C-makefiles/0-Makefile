@@ -1,0 +1,23 @@
+# Makefile for school executable
+
+# Compiler
+CC = gcc
+
+# Source files
+SRC = main.c school.c
+
+# Executable name
+EXEC = school
+
+# Compiler flags
+CFLAGS = -std=gnu89
+
+# Rules
+all: $(EXEC)
+
+$(EXEC): $(SRC)
+	$(CC) $(SRC) -o $(EXEC) $(CFLAGS)
+
+# Clean rule
+clean:
+	rm -f $(EXEC)
