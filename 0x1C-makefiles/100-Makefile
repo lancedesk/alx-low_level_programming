@@ -3,9 +3,6 @@
 # Compiler
 CC = gcc
 
-# Compiler flags
-CFLAGS = -Wall -Werror -Wextra -pedantic
-
 # Source files
 SRC = main.c school.c
 
@@ -15,22 +12,19 @@ OBJ = $(SRC:.c=.o)
 # Executable name
 NAME = school
 
-# Program to delete files
-RM = rm -f
+# Compiler flags
+CFLAGS = -Wall -Werror -Wextra -pedantic
 
-# Rules
-all: $(NAME)
-
-$(NAME): $(OBJ)
-	$(CC) $(OBJ) -o $(NAME) $(CFLAGS)
+# Phony targets to prevent conflicts with file names
+.PHONY: all clean oclean fclean re
 
 # Compile source files to object files
-%.o: %.c
-	$(CC) -c $< -o $@ $(CFLAGS)
+all: m.h $(OBJ)
+	$(CC) $(OBJ) -o $(NAME)
 
 # Clean rule
 clean:
-	$(RM) *~ $(NAME)
+	$(RM) *~ .*.swp $(NAME)
 
 # Oclean rule
 oclean:
@@ -38,13 +32,6 @@ oclean:
 
 # Fclean rule
 fclean: clean oclean
-	$(RM) $(NAME)
 
 # Re rule
 re: fclean all
-
-# Ensure m.h exists
-$(SRC): m.h
-
-# Phony targets to prevent conflicts with file names
-.PHONY: all clean oclean fclean re
