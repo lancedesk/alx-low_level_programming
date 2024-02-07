@@ -10,7 +10,7 @@ void print_index_value(int *array, size_t index);
  * @size: Number of elements in the array
  * @value: Value to search for
  *
- * Description: Uses the square root of the size of the array as the jump step.
+ * Uses the square root of the size of the array as the jump step.
  * Prints each value in the array that is compared to the target value.
  *
  * Return: Index of the value in the array if found, otherwise -1
