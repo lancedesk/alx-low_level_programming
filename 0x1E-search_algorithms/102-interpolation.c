@@ -1,8 +1,10 @@
 #include "search_algos.h"
 
+void print_checked_value(int *array, size_t index);
+
 /**
  * interpolation_search - Searches for a value in a sorted array
- *                         using Interpolation search algorithm
+ * using Interpolation search algorithm
  * @array: Pointer to the first element of the array to search in
  * @size: Number of elements in the array
  * @value: Value to search for
@@ -12,30 +14,44 @@
 
 int interpolation_search(int *array, size_t size, int value)
 {
-	size_t low = 0, high = size - 1, pos;
-	double hi_lo_dif, hi_lo_arr;
+	size_t left = 0, right = size - 1, position;
+	double r_l_diff, r_l_arr, arr_l;
 
-	if (array == NULL || size == 0)
+	if (array == NULL)
 		return (-1);
 
-	while (low <= high && value >= array[low] && value <= array[high])
+	while (left <= right && value >= array[left] && value <= array[right])
 	{
-		hi_lo_dif = (double)(high - low);
-		hi_lo_arr = (array[high] - array[low]);
-		pos = low + ((hi_lo_dif / hi_lo_arr) * (value - array[low]));
-		printf("Value checked array[%lu] = [%d]\n", pos, array[pos]);
+		r_l_diff = (double)(right - left);
+		r_l_arr = (array[right] - array[left]);
+		arr_l = array[left];
 
-		if (array[pos] == value)
-			return (pos);
+		position = left + ((r_l_diff / r_l_arr) * (value - arr_l));
 
-		if (array[pos] < value)
-			low = pos + 1;
+		print_checked_value(array, position);
+
+		if (array[position] == value)
+			return (position);
+		else if (array[position] < value)
+			left = position + 1;
 		else
-			high = pos - 1;
+			right = position - 1;
 	}
 
-	if (low <= high)
-		printf("Value checked array[%lu] is out of range\n", low);
-
+	printf("Value checked array[%lu] is out of range\n", position);
 	return (-1);
+}
+
+/**
+ * print_checked_value - Prints the value checked during interpolation search
+ * @array: Pointer to the array being searched
+ * @index: Index of the value being checked
+ *
+ * This function prints value checked during interpolation search algorithm.
+ * It prints value and its corresponding index in the array.
+ */
+
+void print_checked_value(int *array, size_t index)
+{
+	printf("Value checked array[%lu] = [%d]\n", index, array[index]);
 }
